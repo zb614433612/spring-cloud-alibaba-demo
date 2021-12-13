@@ -1,6 +1,7 @@
 package com.zbdemo.commons.config;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -27,7 +28,9 @@ public class Swagger2Config {
                 //控制暴露出去的路径下的实例
                 //如果某个接口不想暴露,可以使用以下注解
                 //@ApiIgnore 这样,该接口就不会暴露在 swagger2 的页面下
-                .apis(RequestHandlerSelectors.basePackage("com.zbdemo"))
+//                .apis(RequestHandlerSelectors.basePackage("com.zbdemo"))
+                // 这里不配置具体路径，扫描所有带有swagger注解的controller
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
                 .build();
     }

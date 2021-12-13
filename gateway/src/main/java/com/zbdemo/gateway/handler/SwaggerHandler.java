@@ -16,6 +16,7 @@ import java.util.Optional;
 public class SwaggerHandler {
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
+
     @Autowired(required = false)
     private UiConfiguration uiConfiguration;
     private final SwaggerResourcesProvider swaggerResources;
@@ -24,7 +25,6 @@ public class SwaggerHandler {
     public SwaggerHandler(SwaggerResourcesProvider swaggerResources) {
         this.swaggerResources = swaggerResources;
     }
-
 
     @GetMapping("/configuration/security")
     public Mono<ResponseEntity<SecurityConfiguration>> securityConfiguration() {
@@ -36,11 +36,11 @@ public class SwaggerHandler {
     public Mono<ResponseEntity<UiConfiguration>> uiConfiguration() {
         return Mono.just(new ResponseEntity<>(
                 Optional.ofNullable(uiConfiguration).orElse(UiConfigurationBuilder.builder().build()), HttpStatus.OK));
+
     }
 
     @GetMapping("")
     public Mono<ResponseEntity> swaggerResources() {
-        //入口
         return Mono.just((new ResponseEntity<>(swaggerResources.get(), HttpStatus.OK)));
     }
 }

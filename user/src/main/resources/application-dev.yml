@@ -3,5 +3,5 @@ Spring:
     nacos:
       discovery:
         server-addr: 192.168.101.3:8848
-    application:
-      name: user
+  application:
+    name: user
